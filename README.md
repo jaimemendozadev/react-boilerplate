@@ -51,6 +51,7 @@ Add the following dependencies
 - `webpack`
 - `webpack-cli`
 - `webpack-dev-server`
+- `webpack-merge`
 
 
 How I Setup the Webpack Config file. Also, I <strong>DARE</strong> you to try to remember the syntax for writing a rule to compile your `jsx` code.

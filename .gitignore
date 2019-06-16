@@ -63,5 +63,6 @@ typings/
 # dist folder
 dist
 
+# /public folder files
 public/*.js
 public/*.css

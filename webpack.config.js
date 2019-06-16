@@ -1,17 +1,11 @@
-const path = require('path');
+const merge = require('webpack-merge');
+const devConfig = require('./webpack/dev.config');
+const baseConfig = require('./webpack/base.conifg');
+module.exports = env => {
 
-const public = path.resolve(__dirname, 'public');
-const entry = path.resolve(__dirname, 'dev/index.jsx');
-
-module.exports = {
-  entry,
-  output: {
-    path: public,
-    filename: 'bundle.js'
-  },
-  module: {
-    rules: [
-      { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'babel-loader' }
-    ]
+  if(env.dev) {
+    merge(devConfig, baseConfig(env));
   }
+
+  return baseConfig(env);
 }
