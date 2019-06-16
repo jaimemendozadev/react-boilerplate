@@ -1,5 +1,5 @@
 import * as React from "react";
 
-const Label = () => <h3>Label</h3>;
+const Label = () => <h3>New Label</h3>;
 
 export default Label;

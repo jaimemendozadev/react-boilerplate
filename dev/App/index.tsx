@@ -8,7 +8,7 @@ const emoji = "\u{1F525}";
 const App = () => (
   <Fragment>
     <h1>React Boilerplate with {emoji} Reloading!</h1>
-    <h3>Current output from Add() function: {Add(5, 2)}</h3>
+    <h3>Output from Add() function: {Add(5, 2)}</h3>
     <Label />
   </Fragment>
 )

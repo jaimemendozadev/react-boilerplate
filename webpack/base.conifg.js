@@ -4,8 +4,7 @@ const entry = path.resolve(__dirname, "../dev/index.tsx");
 const publicPath = path.resolve(__dirname, "../public");
 
 module.exports = env => {
-  console.log('webpack env is ', env);
-
+ 
   return {
     mode: env.mode,
     entry,
@@ -16,9 +15,6 @@ module.exports = env => {
 
     resolve: {
       extensions: [".ts", ".tsx", ".js", ".jsx"],
-      alias: {
-        react: path.resolve(path.join(__dirname, '../node_modules/react')),
-      }
     },
 
     module: {

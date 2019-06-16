@@ -104,13 +104,31 @@ And to add React Hot Reloading, we install `react-hot-loader` as a regular depen
 
 ## TypeScript
 
-We'll be adding TypeScript to an existing React application, using [Microsoft's instructions](https://github.com/Microsoft/TypeScript-React-Conversion-Guide#typescript-react-conversion-guide).
+We'll be adding TypeScript to an existing React application, using [Microsoft's instructions](https://github.com/Microsoft/TypeScript-React-Conversion-Guide#typescript-react-conversion-guide) and relying on React Hot Loader's [TypeScript integration](https://github.com/gaearon/react-hot-loader#typescript) instructions.
 
 
 We'll need to add the following dev dependencies:
 - `typescript`
 - [`awesome-typescript-loader`](https://www.npmjs.com/package/awesome-typescript-loader) 
 - `source-map-loader`
+- `@babel/preset-typescript`
+
+
+Update the `.babelrc` file by adding the `@babel/preset-typescript` to the `presets` array:
+
+```
+{
+  "presets": ["@babel/preset-typescript", "@babel/preset-react", ["@babel/preset-env", {"targets": "> 0.25%, not dead"}]],
+  "plugins": [
+    "@babel/plugin-proposal-object-rest-spread",
+    ["@babel/plugin-transform-runtime", {"helpers": true}],
+    "@babel/plugin-proposal-class-properties",
+    "react-hot-loader/babel"
+  ]
+}
+
+```
+
 
 Next we "get the type declaration files (.d.ts files) from [@types](https://devblogs.microsoft.com/typescript/the-future-of-declaration-files-2/) for any library in use." We add them as regular dependencies. 
 
@@ -139,6 +157,9 @@ We'll configure the `tsconfig.json` file per the instruction boilerplate:
 
       "allowJs": true             // allow a partial TypeScript 
                                   // and JavaScript codebase
+      
+      "moduleResolution": "node"  // Prevents "Cannot find 
+                                  // module 'csstype'" error
    ,
    include": [
       "./src/"
@@ -146,6 +167,58 @@ We'll configure the `tsconfig.json` file per the instruction boilerplate:
 }
 
 ```
+
+*See [GitHub comment](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/24788#issuecomment-398505981) more info on `Cannot find module 'csstype'` error.
+
+
+
+We'll have to add more boilerplate to the webpack.config:
+
+```
+
+const path = require('path');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const entry = path.resolve(__dirname, "../dev/index.tsx");
+const publicPath = path.resolve(__dirname, "../public");
+
+module.exports = env => {
+
+  return {
+    mode: env.mode,
+    entry,
+    output: {
+      path: publicPath,
+      filename: "bundle.js"
+    },
+
+    resolve: {
+      extensions: [".ts", ".tsx", ".js", ".jsx"],
+    },
+
+    module: {
+      rules: [
+        { 
+          test: /\.(t|j)sx?$/, 
+          options: {
+            cacheDirectory: true,
+            babelrc: true,
+          },
+          loader: 'babel-loader' 
+        },
+
+        { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
+      ]
+    },
+    plugins: [
+      new ForkTsCheckerWebpackPlugin()
+    ]
+  }    
+}
+
+```
+
+
+The React Hot Loader GitHub repo [has a great example](https://github.com/gaearon/react-hot-loader/tree/master/examples/typescript) on integrating TypeScript with webpack and React Hot Loader.
 
 ## Created By
 
