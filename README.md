@@ -6,23 +6,48 @@ Note: This repo is a work in progress! Babel and webpack are CONSTANTLY changing
 
 ## Table of contents
 
-- Babel Dependencies
+- Main React Dependencies
+- Main Babel Dependencies
+- Additional Babel Dependencies
 - Webpack Config
 - Created By
 
-## Babel Dependencies
 
-- `babel-core`, `babel-loader`, `babel-preset-react`, `babel-preset-env`: You'll need these to get React and Babel going.
+## Main React Dependencies
+- `react`
+- `react-dom`
+- `@babel/runtime`
 
-- `babel-plugin-transform-runtime`: [To enable using `async/await`](https://dev.to/codeprototype/modernize-your-reactjs-application-with-asyncawait-in-2018-1l9j) because too many `.then`s is just as bad as `callback` hell.
+## Main Babel Dependencies
 
-- `transform-class-properties`: So that we'll [never have to `.bind` the `this` context](https://medium.com/@jacobworrel/babels-transform-class-properties-plugin-how-it-works-and-what-it-means-for-your-react-apps-6983539ffc22) to a handler in the constructor! 
+You'll need these dependencies to get React and Babel going. [But why?!](https://www.valentinog.com/blog/babel/)
+- `@babel/core`
+- `babel-loader`: It's the Webpack loader responsible for taking in the ES6 code and making it understandable by the browser of choice.
+- `@babel/preset-react`: For compiling JSX and other stuff down to JavaScript.
+- `@babel/preset-env`: For compiling JavaScript ES6 code down to ES5.
 
-- `transform-object-rest-spread`: Because we want to spread those `{...props}` like butter on toast.
+Sources: 
+- https://www.valentinog.com/blog/babel/
+- https://blog.jakoblind.no/babel-preset-env/
+
+
+## Additional Babel Dependencies
+
+I personally can't use React without these gems:
+
+- `@babel/plugin-transform-runtime`: To enable using `async/await` because too many `.then` declarations is just as bad as `callback` hell.
+
+- `@babel/plugin-proposal-class-properties`: So that we'll never have to `.bind` the `this` context to a handler in the constructor! 
+
+- `@babel/plugin-proposal-object-rest-spread`: Because we want to spread those `{...props}` like butter on toast.
+
+Why do we need plugins? Because they do the heavy lifting. [Read on...](https://blog.jakoblind.no/babel-preset-env/)
+
+Original citations [here](https://medium.com/@jacobworrel/babels-transform-class-properties-plugin-how-it-works-and-what-it-means-for-your-react-apps-6983539ffc22) and [here](https://dev.to/codeprototype/modernize-your-reactjs-application-with-asyncawait-in-2018-1l9j).
 
 ## Webpack Config
 
-How I Setup the Webpack Config file. Also, I DARE you to try to remember the syntax for writing a rule to compile your `jsx` code.
+How I Setup the Webpack Config file. Also, I <strong>DARE</strong> you to try to remember the syntax for writing a rule to compile your `jsx` code.
 
 ```
 const path = require('path');
@@ -38,7 +63,7 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.js?x$/, exclude: /node_modules/, loader: 'babel-loader' }
+      { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'babel-loader' }
     ]
   }
 }
