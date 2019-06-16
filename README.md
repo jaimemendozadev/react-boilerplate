@@ -9,7 +9,7 @@ Note: This repo is a work in progress! Babel and webpack are CONSTANTLY changing
 - Main React Dependencies
 - Main Babel Dependencies
 - Additional Babel Dependencies
-- Webpack Config
+- Webpack
 - Created By
 
 
@@ -45,7 +45,13 @@ Why do we need plugins? Because they do the heavy lifting. [Read on...](https://
 
 Original citations [here](https://medium.com/@jacobworrel/babels-transform-class-properties-plugin-how-it-works-and-what-it-means-for-your-react-apps-6983539ffc22) and [here](https://dev.to/codeprototype/modernize-your-reactjs-application-with-asyncawait-in-2018-1l9j).
 
-## Webpack Config
+## Webpack
+
+Add the following dependencies
+- `webpack`
+- `webpack-cli`
+- `webpack-dev-server`
+
 
 How I Setup the Webpack Config file. Also, I <strong>DARE</strong> you to try to remember the syntax for writing a rule to compile your `jsx` code.
 
