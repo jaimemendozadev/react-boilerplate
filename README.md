@@ -10,6 +10,7 @@ Note: This repo is a work in progress! Babel and webpack are <strong>CONSTANTLY<
 - Main Babel Dependencies
 - Additional Babel Dependencies
 - Webpack
+- TypeScript
 - Created By
 
 
@@ -100,6 +101,51 @@ Here's what some of the arguments that we pass to `webpack-dev-server` mean:
 
 And to add React Hot Reloading, we install `react-hot-loader` as a regular dependency and [follow the instructions in the repo](https://github.com/gaearon/react-hot-loader).
 
+
+## TypeScript
+
+We'll be adding TypeScript to an existing React application, using [Microsoft's instructions](https://github.com/Microsoft/TypeScript-React-Conversion-Guide#typescript-react-conversion-guide).
+
+
+We'll need to add the following dev dependencies:
+- `typescript`
+- [`awesome-typescript-loader`](https://www.npmjs.com/package/awesome-typescript-loader) 
+- `source-map-loader`
+
+Next we "get the type declaration files (.d.ts files) from [@types](https://devblogs.microsoft.com/typescript/the-future-of-declaration-files-2/) for any library in use." We add them as regular dependencies. 
+
+- `@types/react` 
+- `@types/react-dom`
+
+We'll configure the `tsconfig.json` file per the instruction boilerplate:
+
+```
+
+{
+   compilerOptions": {
+      "outDir": "./dist/",        // path to output directory
+      
+      "sourceMap": true,          // allow sourcemap support
+
+      "strictNullChecks": true,   // enable strict null checks 
+                                  // as a best practice
+      
+      "module": "es6",            // specify module code generation
+      
+      "jsx": "react",             // use typescript to 
+                                  // transpile jsx to js
+
+      "target": "es5",            // specify ECMAScript target version
+
+      "allowJs": true             // allow a partial TypeScript 
+                                  // and JavaScript codebase
+   ,
+   include": [
+      "./src/"
+   
+}
+
+```
 
 ## Created By
 
