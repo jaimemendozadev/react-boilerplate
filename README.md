@@ -2,7 +2,7 @@
 
 My own standard React boilerplate with Webpack, all the Babel dependencies I can't commit to memory because they're hard to remember, and assorted notes.
 
-Note: This repo is a work in progress! Babel and webpack are CONSTANTLY changing. This repo is more for my reference and benefit than yours. :-P
+Note: This repo is a work in progress! Babel and webpack are <strong>CONSTANTLY</strong> changing. This repo is more for my reference and benefit than yours. :-P
 
 ## Table of contents
 
@@ -53,28 +53,52 @@ Add the following dependencies
 - `webpack-dev-server`
 - `webpack-merge`
 
+For my webpack config, I setup the main `webpack.config.js` file at the root with a separte `webpack` folder that contains separate `config` files based on environments.
 
-How I Setup the Webpack Config file. Also, I <strong>DARE</strong> you to try to remember the syntax for writing a rule to compile your `jsx` code.
+
+Using `webpack-merge`, based on the `env`, I can either merge the `base.config.js` with either the `dev` or `prod` config file.
 
 ```
-const path = require('path');
 
-const public = path.resolve(__dirname, 'public');
-const dev = path.resolve(__dirname, 'dev/index.jsx');
+const merge = require('webpack-merge');
+const devConfig = require('./webpack/dev.config');
+const baseConfig = require('./webpack/base.conifg');
 
+module.exports = env => {
+
+  if(env.dev) {
+    return merge(devConfig, baseConfig(env));
+  }
+
+  return baseConfig(env);
+}
+
+```
+
+For `webpack-dev-server`, I add a `devServer` property in the `dev.config.js` file:
+
+```
 module.exports = {
-  entry: dev,
-  output: {
-    path: public,
-    filename: 'bundle.js'
-  },
-  module: {
-    rules: [
-      { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'babel-loader' }
-    ]
+  devServer: {
+    contentBase: path.join(__dirname, "../public"),
   }
 }
+
 ```
+
+In the `package.json`, I add the following script to kickoff the dev server:
+
+```
+{ "dev:build": "webpack-dev-server --hot --inline --env.dev --mode=development"}
+```
+Here's what some of the arguments that we pass to `webpack-dev-server` mean:
+
+-  `--hot`: Enables Hot Module Replacement.
+
+- `--inline`: By default the application will be served with inline mode enabled. This means that a script will be inserted in your bundle to take care of live reloading, and build messages will appear in the browser console. [...] Inline mode is recommended for Hot Module Replacement as it includes an HMR trigger from the websocket. ([From `webpack` docs](https://webpack.js.org/configuration/dev-server/#devserverinline))
+
+
+And to add React Hot Reloading, we install `react-hot-loader` as a regular dependency and [follow the instructions in the repo](https://github.com/gaearon/react-hot-loader).
 
 
 ## Created By

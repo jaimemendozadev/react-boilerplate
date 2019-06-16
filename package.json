@@ -6,7 +6,8 @@
   "author": "jaimemendozadev <jaimemendozadev@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev:build": "webpack --env.dev --env.blargh='something something' --mode=development"
+    "dev:build": "webpack-dev-server --hot --inline --env.dev --mode=development",
+    "nu:clear": "rm -rfv node_modules && rm -rfv yarn.lock && rm -rfv public/*.js"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
@@ -24,6 +25,7 @@
   "dependencies": {
     "@babel/runtime": "^7.4.5",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-hot-loader": "^4.11.1"
   }
 }

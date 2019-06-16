@@ -4,7 +4,7 @@ const baseConfig = require('./webpack/base.conifg');
 module.exports = env => {
 
   if(env.dev) {
-    merge(devConfig, baseConfig(env));
+    return merge(devConfig, baseConfig(env));
   }
 
   return baseConfig(env);

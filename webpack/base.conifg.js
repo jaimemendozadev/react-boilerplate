@@ -1,5 +1,5 @@
 const path = require('path');
-const entry = path.resolve(__dirname, "../dev/index.jsx");
+const entry = path.resolve(__dirname, "../dev/index.js");
 const publicPath = path.resolve(__dirname, "../public");
 
 module.exports = env => {
