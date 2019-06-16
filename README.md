@@ -100,6 +100,7 @@ Here's what some of the arguments that we pass to `webpack-dev-server` mean:
 
 And to add React Hot Reloading, we install `react-hot-loader` as a regular dependency and [follow the instructions in the repo](https://github.com/gaearon/react-hot-loader).
 
+There's also a TypeScript boilerplate available in the TypeScript branch.
 
 ## Created By
 
