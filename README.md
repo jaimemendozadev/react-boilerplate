@@ -109,9 +109,10 @@ We'll be adding TypeScript to an existing React application, using [Microsoft's 
 
 We'll need to add the following dev dependencies:
 - `typescript`
-- [`awesome-typescript-loader`](https://www.npmjs.com/package/awesome-typescript-loader) 
 - `source-map-loader`
 - `@babel/preset-typescript`
+
+*The Microsoft repo says we need to add [`awesome-typescript-loader`](https://www.npmjs.com/package/awesome-typescript-loader) as a dev dependency, but you can just use Babel to transpile the TypeScript files for you with `@babel/preset-typescript`.
 
 
 Update the `.babelrc` file by adding the `@babel/preset-typescript` to the `presets` array:
