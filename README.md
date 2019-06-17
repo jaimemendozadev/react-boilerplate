@@ -54,7 +54,7 @@ Add the following dependencies
 - `webpack-dev-server`
 - `webpack-merge`
 
-For my webpack config, I setup the main `webpack.config.js` file at the root with a separte `webpack` folder that contains separate `config` files based on environments.
+For my webpack config, I setup the main `webpack.config.js` file at the root with a separate `webpack` folder that contains separate `config` files based on environments.
 
 
 Using `webpack-merge`, based on the `env`, I can either merge the `base.config.js` with either the `dev` or `prod` config file.
